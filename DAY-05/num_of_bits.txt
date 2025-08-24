@@ -1,0 +1,7 @@
+class Solution {
+public:
+    int hammingWeight(int n) {
+        string temp=bitset<32>(n).to_string();
+        return count(temp.begin(),temp.end(),'1');
+    }
+};

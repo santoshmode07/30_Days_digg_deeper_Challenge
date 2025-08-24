@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool isHappy(int n) {
+        int check=n;
+        while(n!=1){
+            int temp=n;
+            int res=0;
+            while(temp>0){
+                res+=(temp%10)*(temp%10);
+                temp/=10;
+            }
+            n=res;
+            if(check==n) return false;
+            else if(n>1&&n<10) check=n;
+        }
+        return true;
+    }
+};
