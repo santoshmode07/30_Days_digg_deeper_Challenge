@@ -1,0 +1,55 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+       int count=1;
+       int n=chars.size();
+       int j=0;
+       for(int i=1;i<n;i++){
+            if(chars[i]==chars[i-1]){
+                count++;
+            }
+            else{
+                if(count==1){
+                    chars[j]=chars[i-1];
+                    j++;
+                }
+                else if(count<=9){
+                    chars[j]=chars[i-1];
+                    j++;
+                    chars[j]=(count+'0');
+                    j++;
+                }
+                else{
+                    chars[j]=chars[i-1];
+                    j++;
+                    string get=to_string(count);
+                    for(int k=0;k<get.size();k++){
+                        chars[j]=get[k];
+                        j++;
+                    }
+                }
+                count=1;
+            }
+       }
+       if(count==1){
+            chars[j]=chars[n-1];
+            j++;
+        }
+        else if(count<=9){
+            chars[j]=chars[n-1];
+            j++;
+            chars[j]=(count+'0');
+            j++;
+        }
+        else{
+            chars[j]=chars[n-1];
+            j++;
+            string get=to_string(count);
+            for(int k=0;k<get.size();k++){
+                chars[j]=get[k];
+                j++;
+            }
+        }
+       return j;
+    }
+};
