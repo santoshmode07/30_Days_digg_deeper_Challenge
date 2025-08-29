@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool pali(string s){
+        int n=s.size();
+        for(int i=0;i<n/2;i++){
+            if(s[i]!=s[n-i-1]){
+                return false;
+            }
+        }
+        return true;
+    }
+    bool validPalindrome(string s) {
+        if(pali(s)){
+            return true;
+        }
+        int n=s.size();
+        int left=0,right=n-1;
+        while(left<right){
+            if(s[left]!=s[right]){
+                return pali(s.substr(left+1,right-left)) || pali(s.substr(left,right-left));
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+};
