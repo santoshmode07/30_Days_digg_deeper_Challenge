@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int summ(vector<int>&nums,int mid){
+        int n=nums.size(),sum=0,count=1;
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+            if(sum>mid){
+                count++;
+                sum=nums[i];
+            }
+        }
+        return count;
+    }
+    int splitArray(vector<int>& nums, int k) {
+        int left=*max_element(nums.begin(),nums.end()),ans=-1;
+        int right=accumulate(nums.begin(),nums.end(),0);
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            int get=summ(nums,mid);
+            if(get<=k){
+                ans=mid;
+                right=mid-1;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return ans;
+    }
+};
