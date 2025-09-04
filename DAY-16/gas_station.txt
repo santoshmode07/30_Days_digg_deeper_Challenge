@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        int gassum=accumulate(gas.begin(),gas.end(),0);
+        int costsum=accumulate(cost.begin(),cost.end(),0);
+        if(gassum<costsum) return -1;
+        int n = gas.size();
+        int i=0,j=0;
+        while(i<n){
+            int pro = 0;
+            int traverse = 0;
+            j=i;
+            while (traverse < n) {
+                pro += gas[j] - cost[j];
+                if (pro < 0) break;  
+                j = (j + 1) % n;
+                traverse++;
+            }
+            if (traverse == n) {
+                return i; 
+            }
+            else{
+                i=j+1;
+            }
+        }
+
+        return -1;
+    }
+};
