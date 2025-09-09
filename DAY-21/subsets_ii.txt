@@ -1,0 +1,22 @@
+class Solution {
+public:
+    void helper(int index,int n,vector<int>&nums,vector<int>&ds,vector<vector<int>>&store){
+        if(index>=n){
+            store.push_back(ds);
+            return;
+        }
+        ds.push_back(nums[index]);
+        helper(index+1,n,nums,ds,store);
+        ds.pop_back();
+        int j=index+1;
+        while(j<n&&nums[index]==nums[j]) j++;
+        helper(j,n,nums,ds,store);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int>ds;
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>store;
+        helper(0,nums.size(),nums,ds,store);
+        return store;
+    }
+};
